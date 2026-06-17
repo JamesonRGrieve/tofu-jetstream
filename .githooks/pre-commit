@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Workspace pre-commit gate (../CLAUDE.md §8): formatter clean, vet clean,
+# tests pass, build succeeds. Enable with: git config core.hooksPath .githooks
+set -euo pipefail
+
+if ! command -v go >/dev/null 2>&1; then
+  echo "pre-commit: go toolchain not found in PATH" >&2
+  exit 1
+fi
+
+echo "pre-commit: gofmt"
+unformatted="$(gofmt -l .)"
+if [ -n "$unformatted" ]; then
+  echo "pre-commit: the following files need gofmt:" >&2
+  echo "$unformatted" >&2
+  exit 1
+fi
+
+echo "pre-commit: go vet"
+go vet ./...
+
+echo "pre-commit: go test"
+go test ./...
+
+echo "pre-commit: go build"
+go build ./...
+
+echo "pre-commit: OK"

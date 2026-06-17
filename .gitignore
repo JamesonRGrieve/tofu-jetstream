@@ -1,0 +1,21 @@
+# Build artifacts
+/terraform-provider-jetstream
+/dist/
+*.exe
+
+# Go
+/vendor/
+
+# OpenTofu / Terraform local state & overrides
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.dev.tfrc
+*.terraformrc
+
+# Editor / OS
+*.swp
+.DS_Store
