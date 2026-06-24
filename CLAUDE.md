@@ -1,5 +1,15 @@
 # jetstream — Agent Operating Guide
 
+> **⛔ NO DIRECT APPLIES TO ANY DEVICE — EVER.**
+>
+> Direct changes to **any** device — router, firewall, switch, access point, hypervisor, mail gateway, or any other appliance — are **NEVER** permitted, by anyone, for any reason. This bans hand-run `tofu apply`, hand-run `ansible-playbook`, SSH/serial/CLI config writes, REST/API mutations, and web-GUI/console edits.
+>
+> **Every change MUST flow through the sanctioned pipeline:** declare intent in **prod-netbox** (the single source of truth), then realize it **only** through **prod-semaphore** (the sanctioned runner). A change that did not go **prod-netbox → prod-semaphore** must never reach a device.
+>
+> **Sole exception:** a specific direct action is permitted *only* when the operator authorizes that exact action in advance by answering an explicit, **alarm-flavored `AskUserQuestion`** — one that names the device, the precise action, and the risk — **in the affirmative**. No standing grants, no inferred permission, no carrying one approval to another action or device. Absent that in-the-moment "yes," the answer is no.
+>
+> **Never offload the work onto the operator.** When you are blocked, ask for the break-glass authorization that lets *you* do the job — never ask the operator to run a command, SSH in, or make the change on your behalf. The operator grants permission; they do not perform your labour.
+
 Native OpenTofu/Terraform provider for **TP-Link JetStream smart switches**
 (e.g. the **TL-SG2008**) driven over **TELNET**. Sibling of `../tofu-aruba-aos`
 (the in-house managed-switch provider) and `../tofu-ddwrt` / `../tofu-tomato`
